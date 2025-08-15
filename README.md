@@ -33,8 +33,8 @@ Reference image:
 
 ## 💻 Technical Details (challenge code only)
 
-### HTML and CSS
-
+### HTML
+```html
 <div class="mondrian">
   <div class="item1"></div>
   <div class="item2"></div>
@@ -45,7 +45,10 @@ Reference image:
   <div class="item7"></div>
   <div class="item8"></div>
 </div>
+```
 
+### CSS
+```CSS
 .mondrian {
   width: min(85vmin, 560px);
   aspect-ratio: 1/1;
@@ -66,7 +69,12 @@ Reference image:
 .item6 { grid-column: 4/5; grid-row: 3/5; background: #f4f4f4; }
 .item7 { grid-column: 3/4; grid-row: 4/5; background: #f4c300; }
 .item8 { grid-column: 4/5; grid-row: 4/5; background: #000; }
+```
+
+## 📜 License
 
 This project is for educational purposes.
+
 Artwork reference © Piet Mondrian.
-Code © 2025 by Luanna • Studies.
+
+Code © 2025 by Luanna 
