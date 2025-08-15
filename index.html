@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CSS Grid Mondrian – Luanna • Studies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ====== LAYOUT ====== */
+    :root {
+      --bg: #0f0f10;
+      --bg-soft: #161619;
+      --text: #e8e8ea;
+      --muted: #a6a6ad;
+      --line: #27272f;
+      --max: 900px;           /* single-column max width */
+      --vpad: clamp(20px, 5vw, 56px);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* ====== NAV ====== */
+    .nav { width: 100%; border-bottom: 1px solid var(--line); }
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      color: var(--text); text-decoration: none; font-weight: 600;
+    }
+    .brand img {
+      height: 1.2em; width: auto; border-radius: 50%;
+      outline: 1px solid rgba(255,255,255,.15);
+    }
+
+    /* ====== CONTENT ====== */
+    .content { width: 100%; padding: var(--vpad) 16px; }
+    .content-inner { max-width: var(--max); margin: 0 auto; }
+    .hero { margin-bottom: clamp(16px, 4vw, 28px); }
+    .hero h1 {
+      font-size: clamp(28px, 6.5vw, 54px);
+      line-height: 1.05; letter-spacing: -0.02em;
+      margin: 0 0 6px; color: #c9c9cf;
+    }
+    .hero p { margin: 0; color: var(--muted); max-width: 65ch; }
+    .rule { height: 1px; background: var(--line); margin: clamp(16px, 4vw, 28px) 0; }
+
+    .card {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .h2 { margin: 16px 0 8px; font-size: clamp(22px, 3vw, 28px); letter-spacing: -0.01em; }
+    .muted { color: var(--muted); }
+    .prose p { margin: 0 0 10px; }
+
+    /* ====== CODE BLOCKS ====== */
+    pre {
+      margin: 0; padding: 12px;
+      background: #101114; border: 1px solid var(--line);
+      border-radius: 12px; overflow: auto;
+    }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size: .92rem; }
+
+    /* ====== STUDY SCOPE & ARTWORK ====== */
+    .study-scope { --gap: 10px; --board-size: min(85vmin, 560px); }
+    .study-caption { color: var(--muted); margin-top: 10px; }
+
+    /* Challenge CSS only (scoped) */
+    .study-scope .mondrian {
+      width: var(--board-size);
+      aspect-ratio: 1/1;
+      margin: 0 auto;
+      background: #000;
+      padding: var(--gap);
+      display: grid;
+      gap: var(--gap);
+      grid-template-columns: 4.64fr 2.64fr 2.64fr 0.67fr;
+      grid-template-rows: 12.16fr 2.91fr 3.48fr 0.45fr;
+    }
+    .study-scope .item1 { grid-column: 1/2; grid-row: 1/2; background: #e11d25; }
+    .study-scope .item2 { grid-column: 2/5; grid-row: 1/2; background: #eff0eb; }
+    .study-scope .item3 { grid-column: 1/2; grid-row: 2/5; background: #f4f4f4; }
+    .study-scope .item4 { grid-column: 2/4; grid-row: 2/4; background: #eeeee6; }
+    .study-scope .item5 { grid-column: 4/5; grid-row: 2/3; background: #0047ab; }
+    .study-scope .item6 { grid-column: 4/5; grid-row: 3/5; background: #f4f4f4; }
+    .study-scope .item7 { grid-column: 3/4; grid-row: 4/5; background: #f4c300; }
+    .study-scope .item8 { grid-column: 4/5; grid-row: 4/5; background: #000; }
+
+    /* ====== RESIZABLE BOX ====== */
+    .resize-wrap {
+      margin-top: 8px;
+      display: grid;
+      gap: 8px;
+    }
+    .resize-note { font-size: .9rem; color: var(--muted); }
+    .resize-box {
+      margin-inline: auto;
+      width: min(100%, 640px);
+      height: min(90vmin, 640px);     /* initial size */
+      min-width: 220px;
+      min-height: 220px;
+      max-width: 760px;
+      max-height: 760px;
+      resize: both;                    /* native resizable handle */
+      overflow: auto;                  /* required for resize to show */
+      border: 1px dashed #3a3a46;
+      border-radius: 12px;
+      padding: 10px;
+      background: #0d0e10;
+    }
+    .resize-box .mondrian { width: 100%; } /* fill the box; aspect-ratio keeps it square */
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#" aria-label="Luanna – Studies">
+        <img src="https://avatars.githubusercontent.com/u/126437522?v=4" alt="Luanna avatar">
+        <span>Luanna • Studies</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="content">
+    <div class="content-inner">
+      <section class="hero" aria-labelledby="title">
+        <h1 id="title">CSS Grid Mondrian Challenge</h1>
+        <p>
+          A front-end study that recreates the painting
+          <em>Composition No. III with Red, Blue, Yellow and Black</em> (1929) by Piet Mondrian using only HTML & CSS.
+          This is based on a <strong>real artwork</strong>, focusing on proportions and line thickness.
+        </p>
+      </section>
+
+      <div class="rule" role="presentation"></div>
+
+      <!-- ABOUT -->
+      <section class="prose card" aria-labelledby="about">
+        <h2 id="about" class="h2">About the artwork & artist</h2>
+        <figure class="card" style="padding:0; overflow:hidden;">
+          <img
+            src="https://www.christies.com/img/LotImages/2015/NYR/2015_NYR_03736_0006C_000(piet_mondrian_composition_no_iii_with_red_blue_yellow_and_black_1929090924).jpg?maxwidth=1010&maxheight=650"
+            alt="Piet Mondrian, Composition No. III with Red, Blue, Yellow and Black (1929).">
+          <figcaption class="study-caption" style="padding: 0 12px 12px;">
+            Piet Mondrian, <em>Composition No. III with Red, Blue, Yellow and Black</em>, 1929. (reference image for study)
+          </figcaption>
+        </figure>
+        <p>
+          <strong>Piet Mondrian</strong> (1872–1944) was a Dutch painter and a founder of <em>De Stijl</em>.
+          He reduced painting to essential elements—straight lines and primary colors—seeking visual balance and harmony.
+          This study explores how to translate those relationships into a responsive grid using pure CSS.
+        </p>
+      </section>
+
+      <div class="rule" role="presentation"></div>
+
+      <!-- GOAL -->
+      <section class="prose card" aria-labelledby="goal">
+        <h2 id="goal" class="h2">Goal</h2>
+        <p class="muted">
+          Recreate the composition with CSS Grid, controlling line thickness and keeping the piece responsive.
+        </p>
+      </section>
+
+      <div class="rule" role="presentation"></div>
+
+      <!-- APPROACH -->
+      <section class="prose card" aria-labelledby="approach">
+        <h2 id="approach" class="h2">Approach</h2>
+        <p class="muted">
+          Fractional <code>grid-template-columns</code> and <code>grid-template-rows</code> define the proportions.
+          The black bars are simulated with container <code>gap</code> + <code>padding</code>.
+          Each color block is positioned using <code>grid-column</code>/<code>grid-row</code>.
+        </p>
+      </section>
+
+      <div class="rule" role="presentation"></div>
+
+      <!-- TECHNICAL DETAILS: SNIPPETS ONLY -->
+      <section class="prose card" aria-labelledby="tech">
+        <h2 id="tech" class="h2">Technical details (challenge code only)</h2>
+
+        <p class="muted"><strong>HTML</strong></p>
+        <pre><code>&lt;div class="mondrian"&gt;
+  &lt;div class="item1"&gt;&lt;/div&gt;
+  &lt;div class="item2"&gt;&lt;/div&gt;
+  &lt;div class="item3"&gt;&lt;/div&gt;
+  &lt;div class="item4"&gt;&lt;/div&gt;
+  &lt;div class="item5"&gt;&lt;/div&gt;
+  &lt;div class="item6"&gt;&lt;/div&gt;
+  &lt;div class="item7"&gt;&lt;/div&gt;
+  &lt;div class="item8"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+        <p class="muted" style="margin-top:10px;"><strong>CSS</strong> (scoped inside <code>.study-scope</code>)</p>
+        <pre><code>.study-scope { --gap: 10px; --board-size: min(85vmin, 560px); }
+
+.study-scope .mondrian {
+  width: var(--board-size);
+  aspect-ratio: 1/1;
+  margin: 0 auto;
+  background: #000;
+  padding: var(--gap);
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: 4.64fr 2.64fr 2.64fr 0.67fr;
+  grid-template-rows: 12.16fr 2.91fr 3.48fr 0.45fr;
+}
+
+.study-scope .item1 { grid-column: 1/2; grid-row: 1/2; background: #e11d25; }
+.study-scope .item2 { grid-column: 2/5; grid-row: 1/2; background: #eff0eb; }
+.study-scope .item3 { grid-column: 1/2; grid-row: 2/5; background: #f4f4f4; }
+.study-scope .item4 { grid-column: 2/4; grid-row: 2/4; background: #eeeee6; }
+.study-scope .item5 { grid-column: 4/5; grid-row: 2/3; background: #0047ab; }
+.study-scope .item6 { grid-column: 4/5; grid-row: 3/5; background: #f4f4f4; }
+.study-scope .item7 { grid-column: 3/4; grid-row: 4/5; background: #f4c300; }
+.study-scope .item8 { grid-column: 4/5; grid-row: 4/5; background: #000; }</code></pre>
+      </section>
+
+      <div class="rule" role="presentation"></div>
+
+      <!-- RENDERED PROJECT (LAST) -->
+      <section class="card" aria-labelledby="rendered">
+        <h2 id="rendered" class="h2">Rendered project (resize me)</h2>
+        <p class="resize-note">Drag the handle at the bottom-right of the box to test responsiveness.</p>
+
+        <div class="resize-wrap">
+          <div class="resize-box" role="region" aria-label="Resizable preview box">
+            <div class="study-scope" aria-label="Mondrian-style composition made with CSS Grid">
+              <div class="mondrian">
+                <div class="item1"></div>
+                <div class="item2"></div>
+                <div class="item3"></div>
+                <div class="item4"></div>
+                <div class="item5"></div>
+                <div class="item6"></div>
+                <div class="item7"></div>
+                <div class="item8"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <figcaption class="study-caption">
+          Black lines = container <code>gap</code> + <code>padding</code>.
+        </figcaption>
+      </section>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="nav-inner" style="justify-content: space-between;">
+      <small>© 2025 • HTML/CSS Studies</small>
+      <small>Luanna • Studies</small>
+    </div>
+  </footer>
+</body>
+</html>
