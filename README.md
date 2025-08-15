@@ -5,6 +5,8 @@ This project is a front-end study that recreates Piet Mondrian’s painting
 
 The exercise explores proportions, line thickness, and responsiveness in a minimalist layout, showing how code can interpret and honor the structure of a real painting.
 
+🌐 [View the live project here](https://luannafalcao.github.io/mondrian-challenge/)
+
 ---
 
 ## 🎨 About the Artwork
